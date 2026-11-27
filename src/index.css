@@ -49,7 +49,7 @@ body {
 .hero__intro {
   position: absolute;
   inset: 0;
-  padding: 5vh 6vw 0;
+  padding: calc(4vh + 64px) 6vw 0; /* leaves room for the top bar */
   z-index: 3;
 }
 
@@ -239,7 +239,7 @@ body {
 
 .hero__corner {
   position: absolute;
-  top: 3vh;
+  top: calc(3vh + 64px); /* below the top bar */
   right: 3vw;
   width: clamp(51px, 5.25vw, 84px);
   aspect-ratio: 1;
@@ -304,7 +304,7 @@ body {
 
 @media (max-width: 767px) {
   .hero__intro {
-    padding: 9svh 5vw 0;
+    padding: calc(5svh + 56px) 5vw 0;
   }
 
   .greet {
@@ -367,7 +367,7 @@ body {
   }
 
   .hero__corner {
-    top: 2svh;
+    top: calc(2svh + 56px);
     right: 4vw;
     width: 42px;
   }
@@ -626,5 +626,461 @@ body {
   .projects__grid {
     grid-template-columns: 1fr;
     gap: 8vw;
+  }
+}
+
+/* ---------- Designed project page: text pinned left, work scrolling right ---------- */
+
+.work--split {
+  display: grid;
+  grid-template-columns: 36vw max(34px, 2.8vw) minmax(0, 1fr);
+}
+
+.work__panel {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  height: 100svh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4.5vh;
+  padding: 4vh 3vw 5vh 4vw;
+}
+
+.work__back,
+.work__next {
+  color: var(--pink);
+  text-decoration: none;
+}
+
+.work__back {
+  align-self: flex-start;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.work__back:hover,
+.work__back:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.work__head {
+  position: relative;
+}
+
+.work__number {
+  margin: 0 0 0.4em;
+  font-family: var(--font-wide);
+  font-weight: 800;
+  font-size: clamp(16px, 1.4vw, 22px);
+}
+
+.work__head h1 {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+}
+
+.work__wide {
+  font-family: var(--font-wide);
+  font-weight: 800;
+  /* Shrinks for long words (--longest is set in ProjectPage.jsx) so they fit. */
+  font-size: min(3.4vw, calc(26vw / var(--longest, 8)));
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.work__script {
+  margin-top: -0.05em;
+  padding-left: 0.3em;
+  font-family: var(--font-script);
+  font-size: clamp(40px, 4.4vw, 76px);
+  line-height: 1.1;
+}
+
+/* Small category line, like the reference's "Branding, Illustration | 2024". */
+.work__meta {
+  margin: 1em 0 0;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.work__sparkle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: clamp(30px, 3vw, 48px);
+  height: clamp(30px, 3vw, 48px);
+}
+
+.work__text h2 {
+  margin: 0 0 0.7em;
+  font-family: var(--font-wide);
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.work__text p {
+  margin: 0;
+  max-width: 30em;
+  font-size: clamp(15px, 1.15vw, 18px);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.work__next {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+}
+
+.work__next-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.work__next-title {
+  font-family: var(--font-wide);
+  font-weight: 800;
+  font-size: clamp(18px, 1.6vw, 26px);
+  text-transform: uppercase;
+}
+
+.work__next:hover .work__next-title,
+.work__next:focus-visible .work__next-title {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+/* The vertical pink "KUHU KAVYA - PORTFOLIO" strip, pinned beside the text. */
+.work__strip {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  height: 100svh;
+  background: var(--pink);
+  color: var(--black);
+}
+
+.work__band {
+  display: none;
+}
+
+/* The work: rounded panels stacked down the page. */
+.work__gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 2vw;
+  padding: 3vw 3vw 6vw;
+}
+
+.shot {
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #141414;
+}
+
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.shot--many {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  align-items: center;
+  gap: 1.2vw;
+  padding: 1.6vw;
+}
+
+.shot--many img {
+  border-radius: 10px;
+}
+
+/* A single tall image (e.g. a portrait post): smaller and centred in its panel. */
+.shot--tall {
+  display: flex;
+  justify-content: center;
+  padding: 2vw;
+}
+
+.shot--tall img {
+  width: auto;
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 10px;
+}
+
+@media (max-width: 767px) {
+  /* Phones: images first, then the pink band, then the text. */
+  .work--split {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .work__gallery {
+    order: 1;
+  }
+
+  .work__band {
+    order: 2;
+  }
+
+  .work__panel {
+    order: 3;
+  }
+
+  .work__panel {
+    position: static;
+    height: auto;
+    overflow: visible;
+    gap: 32px;
+    padding: 24px 20px 36px;
+  }
+
+  .work__wide {
+    font-size: min(9vw, calc(82vw / var(--longest, 8)));
+  }
+
+  .work__script {
+    font-size: 12vw;
+  }
+
+  .work__sparkle {
+    width: 34px;
+    height: 34px;
+  }
+
+  .work__next {
+    margin-top: 0;
+  }
+
+  .work__strip {
+    display: none;
+  }
+
+  .work__band {
+    display: block;
+    overflow: hidden;
+    padding: 10px 0;
+    background: var(--pink);
+    color: var(--black);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .work__gallery {
+    gap: 14px;
+    padding: 20px 20px 48px;
+  }
+
+  .shot {
+    border-radius: 14px;
+  }
+
+  .shot--tall {
+    padding: 10px;
+  }
+
+  .shot--tall img {
+    max-height: 75svh;
+  }
+
+  .shot--many {
+    grid-template-columns: repeat(var(--cols-phone), minmax(0, 1fr));
+    gap: 10px;
+    padding: 10px;
+  }
+}
+
+/* ---------- Top bar: "Kuhu Kavya" + pink cards ---------- */
+
+.topbar {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 3vw 16px 4vw;
+}
+
+/* On the homepage it sits over the first screen and scrolls away with it. */
+.topbar--overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.topbar__home {
+  font-family: var(--font-script);
+  font-size: 30px;
+  line-height: 1;
+  color: var(--pink);
+  text-decoration: none;
+}
+
+.topbar__cards {
+  display: flex;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.topbar__card {
+  display: block;
+  padding: 10px 16px 9px;
+  border: 2px solid var(--pink);
+  border-radius: 4px;
+  background: var(--pink);
+  color: var(--black);
+  font-family: var(--font-wide);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.topbar__card:hover,
+.topbar__card:focus-visible {
+  background: var(--black);
+  color: var(--pink);
+  outline: none;
+}
+
+/* ---------- Contact (end of the homepage) ---------- */
+
+.band {
+  overflow: hidden;
+  padding: 10px 0;
+  background: var(--pink);
+  color: var(--black);
+  font-weight: 700;
+  font-size: max(13px, 1vw);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.contact__inner {
+  position: relative;
+  padding: 12vh 6vw 14vh;
+}
+
+.contact h2 {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+}
+
+.contact__wide {
+  font-family: var(--font-wide);
+  font-weight: 800;
+  font-size: clamp(40px, 8vw, 140px);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.contact__script {
+  margin-top: -0.05em;
+  padding-left: 0.4em;
+  font-family: var(--font-script);
+  font-size: clamp(40px, 5vw, 90px);
+  line-height: 1.1;
+}
+
+.contact__sparkle {
+  position: absolute;
+  top: 12vh;
+  right: 6vw;
+  width: clamp(40px, 5vw, 80px);
+  height: clamp(40px, 5vw, 80px);
+}
+
+.contact__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5vh 4vw;
+  max-width: 1000px;
+  margin: 8vh 0 0;
+}
+
+.contact__item dt {
+  margin-bottom: 0.6em;
+  font-family: var(--font-wide);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contact__item dd {
+  margin: 0;
+  font-size: clamp(18px, 1.6vw, 26px);
+  font-weight: 300;
+  overflow-wrap: anywhere;
+}
+
+.contact__item a {
+  color: var(--pink);
+  text-underline-offset: 0.25em;
+}
+
+@media (max-width: 767px) {
+  .topbar {
+    justify-content: center;
+    padding: 14px 4vw 12px;
+  }
+
+  /* Phones: just the cards, centred. */
+  .topbar__home {
+    display: none;
+  }
+
+  .topbar__cards {
+    gap: 8px;
+  }
+
+  .topbar__card {
+    padding: 8px 11px 7px;
+    font-size: 10px;
+  }
+
+  .contact__inner {
+    padding: 8vh 20px 10vh;
+  }
+
+  .contact__sparkle {
+    top: 8vh;
+    right: 20px;
+  }
+
+  .contact__list {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-top: 40px;
   }
 }

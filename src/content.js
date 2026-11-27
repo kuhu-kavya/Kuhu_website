@@ -16,6 +16,25 @@ export const content = {
   face: 'kuhu-face.png',
   faceAlt: 'Pink illustration of Kuhu’s face',
 
+  // The pink cards at the top of every page.
+  nav: [
+    { label: 'About', section: 'about' },
+    { label: 'Projects', section: 'projects' },
+    { label: 'Contact', section: 'contact' },
+  ],
+
+  // The Contact section at the end of the homepage.
+  // ✏️ Placeholders: replace `value` with your details. Add `href` to make one a
+  // link, e.g. href: 'mailto:you@example.com' or 'https://instagram.com/you'.
+  contactHeading: 'Contact',
+  contactLine: 'let’s work together',
+  contact: [
+    { label: 'Email', value: '✏️ your email here' },
+    { label: 'Instagram', value: '✏️ @yourhandle' },
+    { label: 'LinkedIn', value: '✏️ your LinkedIn link' },
+    { label: 'Behance', value: '✏️ your Behance link' },
+  ],
+
   aboutHeading: 'About me',
 
   // Each item is one paragraph; they fade in one after another as you scroll.
