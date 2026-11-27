@@ -6,6 +6,11 @@ export const content = {
   fullName: 'Kuhu Kavya',
   tagline: 'Portfolio',
 
+  // The greeting at the top of the homepage: "Hi, [visitor's name]" + a script line.
+  greeting: 'Hi,',
+  greetingLine: 'welcome to my portfolio',
+  namePlaceholder: 'your name',
+
   // The illustration in public/images/. To swap it, replace that file
   // (keep the same name) or change the name here.
   face: 'kuhu-face.png',

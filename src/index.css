@@ -49,24 +49,94 @@ body {
 .hero__intro {
   position: absolute;
   inset: 0;
-  display: flex;
-  justify-content: center;
-  padding-top: 5vh;
+  padding: 5vh 6vw 0;
   z-index: 3;
 }
 
-/* Stacks "PORTFOLIO" and the name; the name lines up with its right edge. */
+/* The greeting, centred at the top. */
 .hero__title {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
+  text-align: center;
 }
 
-.hero__wordmark {
+/* ---------- Greeting: "HI, [name]" / "welcome to my portfolio" ---------- */
+
+.greet {
+  --greet-room: 88vw; /* width the big line may use */
+  --greet-max: 3.2vw; /* biggest size for the "HI, [name]" line */
+  width: 100%;
+}
+
+/* The big line shrinks for long names (--chars is set in NameGreeting.jsx). */
+.greet__line {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.3em;
   font-family: var(--font-wide);
   font-weight: 800;
-  font-size: 10.5vw;
-  line-height: 1;
+  font-size: min(var(--greet-max), calc(var(--greet-room) / var(--chars)));
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.greet__hi {
+  flex: none;
+}
+
+/* The name box grows with the name: a hidden copy of the text sets its width. */
+.greet__field {
+  position: relative;
+  display: inline-grid;
+  min-width: 0;
+  border-bottom: 0.06em solid var(--pink);
+  cursor: text;
+}
+
+.greet__field::after {
+  content: attr(data-value);
+  grid-area: 1 / 1;
+  visibility: hidden;
+  white-space: pre;
+  padding-right: 0.05em;
+}
+
+.greet__field input {
+  grid-area: 1 / 1;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  caret-color: var(--pink);
+  outline: none;
+}
+
+.greet__field input::placeholder {
+  color: var(--pink);
+  opacity: 0.35;
+}
+
+.greet__field:focus-within {
+  border-bottom-style: dashed;
+}
+
+.greet__welcome {
+  margin: 0.35em 0 0;
+  font-family: var(--font-wide);
+  font-weight: 800;
+  font-size: 3.7vw;
+  line-height: 1.1;
   letter-spacing: 0.01em;
   text-transform: uppercase;
 }
@@ -93,25 +163,31 @@ body {
   transform-origin: center bottom;
 }
 
+/* "✦ Kuhu Kavya", centred under the illustration, just above the "scroll" cue. */
 .hero__name {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(3vh + 26px);
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 0.6vw;
-  margin-top: 0.8vw;
+  gap: 0.5vw;
+  z-index: 3;
 }
 
 .hero__name h1 {
   margin: 0;
   font-family: var(--font-script);
   font-weight: 400;
-  font-size: 4vw;
+  font-size: 2.8vw;
   line-height: 1.1;
   text-shadow: 0 0 2vw var(--black), 0 0 4vw var(--black);
 }
 
 .hero__name-sparkle {
-  width: 2.6vw;
-  height: 2.6vw;
+  width: 1.8vw;
+  height: 1.8vw;
   flex: none;
 }
 
@@ -228,11 +304,16 @@ body {
 
 @media (max-width: 767px) {
   .hero__intro {
-    padding-top: 9svh;
+    padding: 9svh 5vw 0;
   }
 
-  .hero__wordmark {
-    font-size: 10vw;
+  .greet {
+    --greet-room: 90vw;
+    --greet-max: 5.5vw;
+  }
+
+  .greet__welcome {
+    font-size: 7vw;
   }
 
   .hero__face-wrap {
@@ -247,17 +328,17 @@ body {
   }
 
   .hero__name {
-    gap: 1.5vw;
-    margin-top: 1.5vw;
+    bottom: calc(3svh + 24px);
+    gap: 1.2vw;
   }
 
   .hero__name h1 {
-    font-size: 8vw;
+    font-size: 5.6vw;
   }
 
   .hero__name-sparkle {
-    width: 5vw;
-    height: 5vw;
+    width: 3.5vw;
+    height: 3.5vw;
   }
 
   .hero__strip {
