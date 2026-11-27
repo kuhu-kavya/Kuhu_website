@@ -53,8 +53,17 @@ export default function Hero() {
   return (
     <section ref={ref} className="hero" style={{ height: reduceMotion ? 'auto' : '260vh' }}>
       <div className={`hero__stage${reduceMotion ? ' hero__stage--static' : ''}`}>
-        <motion.div className="hero__intro" style={{ opacity: introOpacity }} aria-hidden="true">
-          <span className="hero__wordmark">{content.tagline}</span>
+        {/* "PORTFOLIO" with the name tucked under its right end */}
+        <motion.div className="hero__intro" style={{ opacity: introOpacity }}>
+          <div className="hero__title">
+            <span className="hero__wordmark" aria-hidden="true">
+              {content.tagline}
+            </span>
+            <div className="hero__name">
+              <Sparkle className="hero__name-sparkle" />
+              <h1>{content.fullName}</h1>
+            </div>
+          </div>
         </motion.div>
 
         <div className="hero__face-wrap">
@@ -65,11 +74,6 @@ export default function Hero() {
             style={{ x: faceX, y: faceY, scale: faceScale }}
           />
         </div>
-
-        <motion.div className="hero__name" style={{ opacity: introOpacity }}>
-          <Sparkle className="hero__name-sparkle" />
-          <h1>{content.fullName}</h1>
-        </motion.div>
 
         <motion.div className="hero__strip" style={{ scaleY: stripScale }}>
           <Ticker text={`${content.fullName} - ${content.tagline}`} />
