@@ -1,4 +1,9 @@
-// The whole site starts here. It's an empty page for now.
+import Hero from './components/Hero.jsx'
+
 export default function App() {
-  return <main />
+  return (
+    <main>
+      <Hero />
+    </main>
+  )
 }

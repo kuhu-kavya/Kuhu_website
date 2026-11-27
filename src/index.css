@@ -1,3 +1,21 @@
+/* Akira Expanded (demo version: free for personal use only) */
+@font-face {
+  font-family: 'Akira Expanded';
+  src: url('./assets/fonts/akira-expanded.otf') format('opentype');
+  font-weight: 800;
+  font-display: swap;
+}
+
+/* 🎨 Colours and fonts from the PDF portfolio. Change them here. */
+:root {
+  --black: #000000;
+  --pink: #f5bde6;
+
+  --font-wide: 'Akira Expanded', 'Arial Black', sans-serif;
+  --font-script: 'Pinyon Script', cursive; /* stands in for Sloop Script Pro */
+  --font-body: 'Bricolage Grotesque', system-ui, sans-serif;
+}
+
 *,
 *::before,
 *::after {
@@ -8,5 +26,267 @@ html,
 body {
   margin: 0;
   min-height: 100%;
-  background: #ffffff;
+  background: var(--black);
+  color: var(--pink);
+  font-family: var(--font-body);
+  overflow-x: clip;
+}
+
+/* ---------- Homepage hero ---------- */
+
+.hero__stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.hero__stage--static {
+  position: relative;
+}
+
+.hero__intro {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  padding-top: 5vh;
+  z-index: 1;
+}
+
+.hero__wordmark {
+  font-family: var(--font-wide);
+  font-weight: 800;
+  font-size: 10.5vw;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.hero__face-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+  /* The illustration has a black background: "lighten" lets the black
+     parts show what's behind them, so only the pink lines cover things. */
+  mix-blend-mode: lighten;
+}
+
+.hero__face {
+  display: block;
+  height: 86vh;
+  width: auto;
+  max-width: 92vw;
+  object-fit: contain;
+  transform-origin: center bottom;
+}
+
+.hero__name {
+  position: absolute;
+  right: 6vw;
+  bottom: 14vh;
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+  z-index: 3;
+}
+
+.hero__name h1 {
+  margin: 0;
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: 8vw;
+  line-height: 1;
+  text-shadow: 0 0 2vw var(--black), 0 0 4vw var(--black);
+}
+
+.hero__name-sparkle {
+  width: 5.25vw;
+  height: 5.25vw;
+  flex: none;
+}
+
+.hero__strip {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 48vw;
+  width: max(34px, 2.8vw);
+  background: var(--pink);
+  color: var(--black);
+  transform-origin: top;
+  z-index: 3;
+}
+
+.hero__about {
+  position: absolute;
+  left: 54vw;
+  right: 7vw;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+}
+
+.hero__about h2 {
+  margin: 0;
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: clamp(56px, 6.5vw, 110px);
+  line-height: 1.1;
+}
+
+.hero__underline {
+  display: block;
+  width: clamp(90px, 9vw, 150px);
+  height: 4px;
+  margin: 0.4em 0 1.6em;
+  background: var(--pink);
+  transform-origin: left;
+}
+
+.hero__about p {
+  max-width: 34em;
+  margin: 0 0 1.1em;
+  font-size: clamp(15px, 1.25vw, 19px);
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.hero__corner {
+  position: absolute;
+  top: 3vh;
+  right: 3vw;
+  width: clamp(51px, 5.25vw, 84px);
+  aspect-ratio: 1;
+  z-index: 3;
+}
+
+.hero__corner svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero__cue {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 3vh;
+  margin: 0;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  z-index: 3;
+}
+
+/* ---------- Ticker strip ---------- */
+
+.ticker {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: max(14px, 1.15vw);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ticker__track {
+  display: flex;
+  flex-direction: column;
+  animation: ticker 60s linear infinite;
+}
+
+.ticker__track span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+@keyframes ticker {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track { animation: none; }
+}
+
+/* ---------- Phones ---------- */
+
+@media (max-width: 767px) {
+  .hero__intro {
+    padding-top: 9svh;
+  }
+
+  .hero__wordmark {
+    font-size: 10vw;
+  }
+
+  .hero__face-wrap {
+    align-items: center;
+  }
+
+  .hero__face {
+    height: auto;
+    width: 88vw;
+    max-height: 72svh;
+    transform-origin: center center;
+  }
+
+  .hero__name {
+    left: 0;
+    right: 0;
+    bottom: 7svh;
+    justify-content: center;
+    gap: 2vw;
+  }
+
+  .hero__name h1 {
+    font-size: 15vw;
+  }
+
+  .hero__name-sparkle {
+    width: 9.45vw;
+    height: 9.45vw;
+  }
+
+  .hero__strip {
+    display: none;
+  }
+
+  .hero__about {
+    left: 20px;
+    right: 20px;
+    top: 34svh;
+    transform: none;
+  }
+
+  .hero__about h2 {
+    font-size: 15vw;
+  }
+
+  .hero__underline {
+    width: 24vw;
+    margin: 0.3em 0 1.1em;
+  }
+
+  .hero__about p {
+    font-size: 15px;
+    margin-bottom: 0.9em;
+  }
+
+  .hero__corner {
+    top: 2svh;
+    right: 4vw;
+    width: 42px;
+  }
 }
