@@ -31,7 +31,7 @@ export default function App() {
   if (project) {
     return (
       <>
-        <TopBar />
+        <TopBar back />
         <main>
           <ProjectPage key={project.slug} project={project} />
         </main>

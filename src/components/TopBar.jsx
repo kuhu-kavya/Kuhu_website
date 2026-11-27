@@ -5,7 +5,8 @@ import { scrollMemory } from '../hooks/useHashRoute.js'
 // The bar at the top of every page: "Kuhu Kavya" on the left (back to the top
 // of the homepage) and pink cards for About / Projects / Contact.
 // `overlay` lays it over the homepage's first screen instead of pushing it down.
-export default function TopBar({ overlay = false }) {
+// `back` (project pages) adds a "← Back" at the top left on phones.
+export default function TopBar({ overlay = false, back = false }) {
   // Clicking a card whose address is already showing doesn't change the
   // address, so scroll there by hand.
   const jump = (hash) => (e) => {
@@ -16,7 +17,12 @@ export default function TopBar({ overlay = false }) {
   }
 
   return (
-    <header className={`topbar${overlay ? ' topbar--overlay' : ''}`}>
+    <header className={`topbar${overlay ? ' topbar--overlay' : ''}${back ? ' topbar--back' : ''}`}>
+      {back && (
+        <a className="topbar__back" href="#">
+          ← Back
+        </a>
+      )}
       <a
         className="topbar__home"
         href="#"

@@ -940,6 +940,17 @@ body {
   text-decoration: none;
 }
 
+.topbar__back {
+  display: none; /* phones only: on laptops the Back link sits in the project panel */
+  color: var(--pink);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 .topbar__cards {
   display: flex;
   gap: 10px;
@@ -1058,6 +1069,32 @@ body {
   /* Phones: just the cards, centred. */
   .topbar__home {
     display: none;
+  }
+
+  /* Project pages on phones: "← Back" top left, cards on the right. */
+  .topbar--back {
+    justify-content: space-between;
+    padding-left: 16px;
+    padding-right: 12px;
+  }
+
+  .topbar--back .topbar__back {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+
+  .topbar--back .topbar__cards {
+    gap: 6px;
+  }
+
+  .topbar--back .topbar__card {
+    padding: 7px 8px 6px;
+    font-size: 9px;
+  }
+
+  .work__panel .work__back {
+    display: none; /* it's in the top bar instead */
   }
 
   .topbar__cards {
